@@ -1,0 +1,23 @@
+version: '3'
+services:
+  ros-dev-container:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DOCKER_REPO: "osrf/ros"
+        ROS_DISTRO: "noetic"
+        DISTRO_VERSION: "-desktop-full"
+    container_name: ros-dev1
+    network_mode: "host"
+    environment:
+      DISPLAY: "${DISPLAY}"
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ${HOME}/.bash_history:/home/vscode/.bash_history
+    ports:
+      - "8080:8080"
+    privileged: true
+    stdin_open: true
+    tty: true
+    command: ["/bin/bash"]

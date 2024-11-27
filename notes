@@ -1,0 +1,27 @@
+### cli 
+docker build --no-cache --build-arg DOCKER_REPO=osrf/ros --build-arg ROS_DISTRO=noetic --build-arg DISTRO_VERSION=-desktop-full -t ros-devcontainer .devcontainer
+
+docker run -it --privileged --network=host --rm \                                                                                                                
+  --env DISPLAY=$DISPLAY \
+  --volume /tmp/.X11-unix:/tmp/.X11-unix \
+  --name ros-dev1 ros-devcontainer 
+
+### use compose
+
+docker-compose up --build
+
+docker-compose exec ros-dev-container /bin/bash
+
+
+### run ros example
+cd ros_ws
+
+catkin_make
+
+source devel/setup.bash
+
+roscore
+
+rosrun node_example node_test
+
+rostopic echo /chatter
