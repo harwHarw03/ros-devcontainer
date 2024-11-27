@@ -25,3 +25,23 @@ roscore
 rosrun node_example node_test
 
 rostopic echo /chatter
+
+### to enable port forwarding (for vnc or web view)
+add this to devcontainer.json
+
+"features": {
+  "ghcr.io/devcontainers/features/desktop-lite:1":{}
+},
+  
+"forwardPorts": [5901, 8008],
+"portsAttributes": {
+  "5901": {
+    "label": "VNC"
+  },
+  "8008": {
+    "label": "WEB"
+  }
+}
+
+and delete 
+"--network=host"
