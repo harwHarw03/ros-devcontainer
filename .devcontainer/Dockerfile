@@ -15,16 +15,18 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y git ssh python3-pip python-is-python3 python3-catkin-tools neovim build-essential
+    apt-get install -y git ssh python3-pip python-is-python3 neovim build-essential \
+    python3-colcon-common-extensions
+
 ENV SHELL /bin/bash
 
 # Switch to user
 USER $USERNAME
 RUN sudo usermod --append --groups video $USERNAME
 
-# Rosdep update
+# ROS 2 Foxy installation
 RUN rosdep update
 
-# Source ROS environment
+# Source ROS 2 environment
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /home/$USERNAME/.bashrc
 CMD ["/bin/bash"]

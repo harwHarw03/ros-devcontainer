@@ -1,11 +1,11 @@
 {
-  "name": "Ros Dev Container",
+  "name": "Ros2 Dev Container",
   "dockerFile": "Dockerfile",
   "build": {
     "args": {
       "DOCKER_REPO": "osrf/ros",
-      "ROS_DISTRO": "noetic",
-      "DISTRO_VERSION": "-desktop-full"
+      "ROS_DISTRO": "foxy",
+      "DISTRO_VERSION": "-desktop"
     }
   },
   "runArgs": [
