@@ -6,17 +6,24 @@ services:
       dockerfile: Dockerfile
       args:
         DOCKER_REPO: "osrf/ros"
-        ROS_DISTRO: "noetic"
+        ROS_DISTRO: "humble"
         DISTRO_VERSION: "-desktop-full"
-    container_name: ros-dev1
+    container_name: ros2-dev1
     network_mode: "host"
+
     environment:
       DISPLAY: "${DISPLAY}"
+      QT_X11_NO_MITSHM: "1"
+      XDG_RUNTIME_DIR: "/tmp/runtime-${USER}"
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - ${HOME}/.bash_history:/home/vscode/.bash_history
+      # - ../:/workspace:rw # uncomment to mount a project's workspace
     ports:
       - "8080:8080"
+
+    working_dir: /workspace
+
     privileged: true
     stdin_open: true
     tty: true
